@@ -1,29 +1,90 @@
 package com.zjj.commoncustomview;
 
+import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.File;
+
 public class MainActivity extends AppCompatActivity {
-
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib");
-    }
-
+    VideoView videoView;
+    ZJJPlayer zjjPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        videoView= (VideoView) findViewById(R.id.surface);
+        zjjPlayer = new ZJJPlayer();
     }
 
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
+
+    public native void open(String inputStr,String outStr);
+
+    public void load(View view) {
+        String input = new File(Environment.getExternalStorageDirectory(),"input.mp4").getAbsolutePath();
+        String  output= new File(Environment.getExternalStorageDirectory(), "output.yuv").getAbsolutePath();
+        open(input, output);
+    }
+
+    public void mPlay(View view) {
+
+        //原生视频播放
+        String input = new File(Environment.getExternalStorageDirectory(),"input.mp4").getAbsolutePath();
+        videoView.player(input);
+
+        //使用AudioTrack做音频播放
+//        String cput = new File(Environment.getExternalStorageDirectory(),"input.mp3").getAbsolutePath();
+//        String output = new File(Environment.getExternalStorageDirectory(),"output.pcm").getAbsolutePath();
+//        ZJJPlayer davidPlayer = new ZJJPlayer();
+//        davidPlayer.sound(cput,output);
+
+        //使用FFmpeg做音频播放
+        zjjPlayer.player();
+
+    }
+
+    public void stop(View view) {
+        zjjPlayer.stop();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.FFmpeg) {
+            startActivity(new Intent(MainActivity.this, FFmpegActivity.class));
+            return true;
+        } else if(id == R.id.faceDetetion){
+            startActivity(new Intent(MainActivity.this, FaceDetetionViewActivity.class));
+            return true;
+        }
+        else if(id == R.id.imageProcess){
+            startActivity(new Intent(MainActivity.this, ImageProcessActivity.class));
+            return true;
+        }
+//        else if(id == R.id.RollDebug){
+//
+//            return true;
+//        }else if(id == R.id.DemoAct){
+//
+//            return true;
+//        }else if(id == R.id.itemTouchHelper){
+//
+//            return true;
+//        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }

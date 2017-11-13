@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/FFmpeg"
+        android:orderInCategory="100"
+        android:title="SwitchToL"
+        app:showAsAction="always"/>
+    <item android:id="@+id/faceDetetion"
+        android:orderInCategory="100"
+        android:title="faceDetetion"
+        app:showAsAction="always"
+        />
+    <item android:id="@+id/imageProcess"
+        android:orderInCategory="100"
+        android:title="imageProcess"
+        app:showAsAction="collapseActionView"
+        />
+    <!--<item android:id="@+id/RollDebug"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="RollDebug"-->
+        <!--app:showAsAction="collapseActionView"-->
+        <!--/>-->
+    <!--<item android:id="@+id/DemoAct"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="DemoAct"-->
+        <!--app:showAsAction="collapseActionView"-->
+        <!--/>-->
+    <!--<item android:id="@+id/itemTouchHelper"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="itemTouchHelper"-->
+        <!--app:showAsAction="collapseActionView"-->
+        <!--/>-->
+</menu>
