@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.4.1)
 
 file(GLOB my_source_path src/main/cpp/*.cpp)
 
+#编译源文件
+file(GLOB my_source_path  src/main/cpp/*.cpp src/main/cpp/*.c)
+
 add_library( native-lib
              SHARED
              ${my_source_path}
@@ -11,8 +14,7 @@ find_library( log-lib
               log )
 include_directories(libs/include)
 include_directories(src/main/cpp/include)
-#编译源文件
-file(GLOB my_source_path  src/main/cpp/*.cpp src/main/cpp/*.c)
+
 
 set(DIR ../../../../libs)
 

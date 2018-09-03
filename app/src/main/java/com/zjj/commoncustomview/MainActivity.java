@@ -1,7 +1,10 @@
 package com.zjj.commoncustomview;
 
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Environment;
+import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -74,10 +77,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, ImageProcessActivity.class));
             return true;
         }
-//        else if(id == R.id.RollDebug){
-//
-//            return true;
-//        }else if(id == R.id.DemoAct){
+        else if(id == R.id.Carplate){
+            startActivity(new Intent(MainActivity.this, CarplateActivity.class));
+            return true;
+        }
+// else if(id == R.id.DemoAct){
 //
 //            return true;
 //        }else if(id == R.id.itemTouchHelper){
@@ -85,6 +89,17 @@ public class MainActivity extends AppCompatActivity {
 //            return true;
 //        }
         return super.onOptionsItemSelected(item);
+    }
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
     }
 
 }

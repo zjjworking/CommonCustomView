@@ -91,18 +91,16 @@ public class ImageProcessActivity extends AppCompatActivity {
                 baseApi = new TessBaseAPI();
                 try {
                     InputStream is = null;
-                    is = getAssets().open(language + ".traineddata");
+                    is = getResources().getAssets().open( language +".traineddata");
                     File file = new File("/sdcard/tess/tessdata/" + language + ".traineddata");
-                    if (!file.exists()) {
-                        file.getParentFile().mkdirs();
-                        FileOutputStream fos = new FileOutputStream(file);
-                        byte[] buffer = new byte[2048];
-                        int len;
-                        while ((len = is.read(buffer)) != -1) {
-                            fos.write(buffer, 0, len);
-                        }
-                        fos.close();
+                    file.getParentFile().mkdirs();
+                    FileOutputStream fos = new FileOutputStream(file);
+                    byte[] buffer = new byte[2048];
+                    int len;
+                    while ((len = is.read(buffer)) != -1) {
+                        fos.write(buffer, 0, len);
                     }
+                    fos.close();
                     is.close();
                     return baseApi.init("/sdcard/tess", language);
                 } catch (IOException e) {

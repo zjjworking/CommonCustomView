@@ -146,7 +146,7 @@ Example:
 @endcode
 */
 template<typename _Tp> class Point_
-            : public std::vector<::cv::Point_<int>> {
+{
 public:
     typedef _Tp value_type;
 

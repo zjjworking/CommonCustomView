@@ -8,12 +8,14 @@
 
 #include <android/bitmap.h>
 
-#include <android/log.h>
 
 #include <opencv/cv.hpp>
+
 extern  "C" {
+#include "Log.h"
 using namespace cv;
 using namespace std;
+
 class ImageProcess{
 public:
     ImageProcess();
